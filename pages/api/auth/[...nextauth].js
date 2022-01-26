@@ -1,10 +1,8 @@
 import NextAuth from "next-auth/next";
-import Credentials from "next-auth/providers/credentials";
-// import Providers from "next-auth/providers";
+
 import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "../../../helpers/auth";
 import connectToDatabase from "../../../helpers/db";
-// import { Provider } from "next-auth/providers";
 
 export default NextAuth({
   sessions: {
@@ -43,8 +41,4 @@ export default NextAuth({
     }),
   ],
   secret: `${process.env.SECRET}`,
-  // jwt: {
-  //   secret: "44d019e4d6de5cd01fbe18fcc3d477174", //use a random secret token here
-  //   encryption: true,
-  // },
 });

@@ -1,10 +1,19 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 import classes from "./main-navigation.module.css";
 
 function MainNavigation() {
-  const { session, loading } = useSession();
+  const { data: session, status, loading } = useSession();
+  console.log(loading);
+  console.log(status);
+  console.log(session);
+
+  const isAuthenticated = status === "authenticated";
+
+  function logOutHandler() {
+    signOut();
+  }
   return (
     <header className={classes.header}>
       <Link href="/">
@@ -14,19 +23,23 @@ function MainNavigation() {
       </Link>
       <nav>
         <ul>
-          <li>
-            <Link href="/auth">Login</Link>
-          </li>
+          {!isAuthenticated && !loading && (
+            <li>
+              <Link href="/auth">Login</Link>
+            </li>
+          )}
 
-          {session && (
+          {isAuthenticated && (
             <li>
               <Link href="/profile">Profile</Link>
             </li>
           )}
 
-          <li>
-            <button>Logout</button>
-          </li>
+          {isAuthenticated && (
+            <li>
+              <button onClick={logOutHandler}>Logout</button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
