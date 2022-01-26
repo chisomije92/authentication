@@ -39,12 +39,13 @@ async function handler(req, res) {
     return;
   }
 
-  const hashPassword = await hashedPassword();
+  const hashPassword = await hashedPassword(newPassword);
 
-  const result = usersCollection.updateOne(
+  const result = await usersCollection.updateOne(
     { email: userEmail },
     { $set: { password: hashPassword } }
   );
+  client.close();
 }
 
 export default handler;
