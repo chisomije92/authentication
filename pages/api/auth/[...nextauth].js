@@ -1,15 +1,21 @@
 import NextAuth from "next-auth/next";
-import Providers from "next-auth/providers";
-import { verifyPassword } from "../../helpers/auth";
-import connectToDatabase from "../../helpers/db";
+import Credentials from "next-auth/providers/credentials";
+// import Providers from "next-auth/providers";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { verifyPassword } from "../../../helpers/auth";
+import connectToDatabase from "../../../helpers/db";
 // import { Provider } from "next-auth/providers";
 
 export default NextAuth({
+  secret: process.env.JWT_SECRET,
+
   sessions: {
     jwt: true,
+
+    // strategy: jwt
   },
   providers: [
-    Providers.Credentials({
+    CredentialsProvider({
       async authorize(credentials) {
         const client = await connectToDatabase();
         const usersCollection = client.db().collection("users");
