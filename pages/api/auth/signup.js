@@ -2,6 +2,9 @@ import { hashedPassword } from "../../../helpers/auth";
 import connectToDatabase from "../../../helpers/db";
 
 async function handler(req, res) {
+  if (req.method !== "POST") {
+    return;
+  }
   const data = req.body;
 
   const { email, password } = data;
@@ -18,13 +21,13 @@ async function handler(req, res) {
     return;
   }
 
-  const hashedPassword = hashedPassword(password);
+  const hashPassword = await hashedPassword(password);
 
   const client = await connectToDatabase();
   const db = client.db();
   const result = await db
     .collection("users")
-    .insertOne({ email: email, password: hashedPassword });
+    .insertOne({ email: email, password: hashPassword });
 
   res.status(201).json({ message: "User created!" });
 }
