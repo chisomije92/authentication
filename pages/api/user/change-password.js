@@ -45,6 +45,7 @@ async function handler(req, res) {
     { email: userEmail },
     { $set: { password: hashPassword } }
   );
+  res.status(200).json({ message: "Password updated" });
   client.close();
 }
 
