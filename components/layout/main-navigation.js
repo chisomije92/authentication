@@ -11,6 +11,8 @@ function MainNavigation() {
 
   const isAuthenticated = status === "authenticated";
 
+  const isLoading = loading === "loading";
+
   function logOutHandler() {
     signOut();
   }
