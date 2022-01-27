@@ -3,7 +3,7 @@ import classes from "./user-profile.module.css";
 
 function UserProfile() {
   async function changePasswordHandler(passwordData) {
-    const response = await fetch("/api/user/change-password", {
+    const response = await fetch("/api/users/change-password", {
       method: "PATCH",
       body: JSON.stringify(passwordData),
       headers: {

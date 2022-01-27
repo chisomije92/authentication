@@ -34,12 +34,22 @@ async function handler(req, res) {
   if (!passwordAreEqual) {
     res
       .status(403)
-      .json({ message: "Permission not granted for invalid password" });
+      .json({ message: "Permission not granted for invalid parameters" });
     client.close();
     return;
   }
 
   const hashPassword = await hashedPassword(newPassword);
+
+  const passwordsAreSame = await verifyPassword(oldPassword, hashPassword);
+
+  if (passwordsAreSame) {
+    res
+      .status(403)
+      .json({ message: "Old password and new password are the same" });
+    client.close();
+    return;
+  }
 
   const result = await usersCollection.updateOne(
     { email: userEmail },
