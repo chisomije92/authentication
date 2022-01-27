@@ -16,7 +16,7 @@ async function handler(req, res) {
     password.trim().length < 7
   ) {
     res.status(422).json({
-      message: "Invalid input - pasword should at least be 7 characters long!",
+      message: "Invalid input - password should at least be 7 characters long!",
     });
     return;
   }
