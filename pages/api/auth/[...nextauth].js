@@ -24,12 +24,12 @@ export default NextAuth({
           throw new Error("No user found");
         }
 
-        const isValid = await verifyPassword(
+        const passwordIsValid = await verifyPassword(
           credentials.password,
           user.password
         );
 
-        if (!isValid) {
+        if (!passwordIsValid) {
           client.close();
           throw new Error("Could not log you in");
         }
