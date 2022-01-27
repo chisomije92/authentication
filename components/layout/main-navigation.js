@@ -4,14 +4,12 @@ import Link from "next/link";
 import classes from "./main-navigation.module.css";
 
 function MainNavigation() {
-  const { data: session, status, loading } = useSession();
-  console.log(loading);
+  const { data: session, status } = useSession();
+
   console.log(status);
-  console.log(session);
+  // console.log(session);
 
   const isAuthenticated = status === "authenticated";
-
-  const isLoading = loading === "loading";
 
   function logOutHandler() {
     signOut();
@@ -25,7 +23,7 @@ function MainNavigation() {
       </Link>
       <nav>
         <ul>
-          {!isAuthenticated && !loading && (
+          {!isAuthenticated && (
             <li>
               <Link href="/auth">Login</Link>
             </li>
