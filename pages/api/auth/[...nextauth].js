@@ -31,7 +31,7 @@ export default NextAuth({
 
         if (!passwordIsValid) {
           client.close();
-          throw new Error("Could not log you in");
+          throw new Error("Invalid Credentials");
         }
         client.close();
         return {
