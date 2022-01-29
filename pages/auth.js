@@ -9,8 +9,11 @@ function AuthPage() {
   const router = useRouter();
   const headData = (
     <Head>
-      <title>Sign-in/Login</title>
-      <meta name="authentication" content={`Sign in`} />
+      <title>Sign-Up/Login</title>
+      <meta
+        name="authentication"
+        content={`Sign up or login to make use of the services offered`}
+      />
     </Head>
   );
 
