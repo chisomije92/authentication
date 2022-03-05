@@ -5,7 +5,7 @@ import { verifyPassword } from "../../../helpers/auth";
 import connectToDatabase from "../../../helpers/db";
 
 export default NextAuth({
-  sessions: {
+  session: {
     jwt: true,
   },
 
